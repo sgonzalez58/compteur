@@ -32,7 +32,7 @@ function App() {
                     <Route path="/" element={
                         <header className='App-header'>
                             {
-                                filled ? bookList.map((bookItem) => bookItem && <Link to={`/book/${bookItem.isbn}`}>
+                                filled ? bookList.map((bookItem) => bookItem && <Link to={`/book/${bookItem.isbn}`} key={`link_book_${bookItem.isbn}`}>
                                                                                     <Book name={bookItem.name}
                                                                                         isbn={bookItem.isbn}
                                                                                         numberOfPages={bookItem.numberOfPages}
