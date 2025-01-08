@@ -32,7 +32,8 @@ const BookForm = ({updateBookList, bookList}) => {
             isbn : formData.isbn
         }
         const newBookList = bookList;
-        newBookList.push(newEntry)
+        newBookList.push(newEntry)*
+        console.log(newBookList)
     }
 
     return (
