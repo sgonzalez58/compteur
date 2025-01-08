@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router";
 import './App.css'
 import Book from './components/Book/Book'
 import BookForm from './components/BookForm/BookForm'
@@ -46,6 +46,7 @@ function App() {
                     <Route path="/book/:isbn"
                         element={<BookDetails books={bookList}/>}
                     />
+                    <Route path="/new" element={<BookForm updateBookList={setBookList} bookList={bookList}/>}/>
                 </Routes>
             </div>
         </BrowserRouter>
