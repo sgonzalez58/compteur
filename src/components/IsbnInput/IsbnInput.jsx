@@ -7,6 +7,7 @@ const IsbnInput = ({name, onChange}) => {
         const isbn = e.target.value;
         const isbnWithoutDashes = isbn.replaceAll('-', '');
         if(!isNaN(isbnWithoutDashes)){
+            setError({errorStatus: false, errorMessage: ''})
             onChange(e)
         }else{
             setError({errorStatus: true, errorMessage: `Bad ISBN Format`})
