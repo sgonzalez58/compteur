@@ -1,9 +1,20 @@
+body[theme-mode='light']{
+  background-color: white;
+  color:black;
+}
+
+body[theme-mode='dark']{
+  background-color: #242424;
+  color:white;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+
 
 .App-header{
   display: flex;

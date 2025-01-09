@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Link } from "react-router";
 import './App.css'
 import Book from './components/Book/Book'
 import BookForm from './components/BookForm/BookForm'
 import BookDetails from './components/BookDetails/BookDetails';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
+import { ThemeContext } from './components/ThemeProvider/ThemeProvider';
 
 function App() {
     
@@ -11,6 +13,7 @@ function App() {
 
     const [bookList, setBookList] = useState([])
     const [filled, setFilled] = useState(false)
+    const { theme } = useContext(ThemeContext)
 
     useEffect(()=>{
         fetch(bookListAPIaddress)
@@ -24,23 +27,27 @@ function App() {
             .catch((error) => console.error(error.message))
     }, [])
     
+    document.getElementsByTagName('body')[0].setAttribute('theme-mode', theme);
 
     return (
         <BrowserRouter>
             <div className='App'>
                 <Routes>
                     <Route path="/" element={
-                        <header className='App-header'>
-                            {
-                                filled ? bookList.map((bookItem) => bookItem && <Link to={`/book/${bookItem.isbn}`} key={`link_book_${bookItem.isbn}`}>
-                                                                                    <Book name={bookItem.name}
-                                                                                        isbn={bookItem.isbn}
-                                                                                        numberOfPages={bookItem.numberOfPages}
-                                                                                        authors={bookItem.authors} key={`book_${bookItem.isbn}`}
-                                                                                    />
-                                                                                </Link>) : <h2>Loading...</h2>
-                            }
-                        </header>
+                        <>
+                            <ThemeSwitcher/>
+                            <header className='App-header'>
+                                {
+                                    filled ? bookList.map((bookItem) => bookItem && <Link to={`/book/${bookItem.isbn}`} key={`link_book_${bookItem.isbn}`}>
+                                                                                        <Book name={bookItem.name}
+                                                                                            isbn={bookItem.isbn}
+                                                                                            numberOfPages={bookItem.numberOfPages}
+                                                                                            authors={bookItem.authors} key={`book_${bookItem.isbn}`}
+                                                                                        />
+                                                                                    </Link>) : <h2>Loading...</h2>
+                                }
+                            </header>
+                        </>
                     }
                     />
                     <Route path="/book/:isbn"
